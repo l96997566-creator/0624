@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이상욱 포트폴리오</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f0f7ff;
+      --bg2: #e6f2ff;
+      --surface: #ffffff;
+      --surface2: #f5f9ff;
+      --sky: #0ea5e9;
+      --sky-light: #38bdf8;
+      --sky-pale: #bae6fd;
+      --sky-ultra: #e0f2fe;
+      --navy: #0c4a6e;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #cbd5e1;
+      --border-light: #e2eff9;
+      --success: #10b981;
+      --shadow: 0 2px 16px rgba(14,165,233,0.08);
+      --shadow-hover: 0 6px 28px rgba(14,165,233,0.16);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Segoe UI', sans-serif;
+      line-height: 1.75;
+      font-size: 15px;
+    }
+
+    /* ── 배경 구름 장식 ── */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -120px; right: -80px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(186,230,253,0.55) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -100px; left: -60px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(56,189,248,0.18) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(240,247,255,0.88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-light);
+      padding: 0 2.5rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--sky);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.1rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      padding: 0.35rem 0.85rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      transition: all 0.18s;
+    }
+
+    .nav-links a:hover {
+      color: var(--sky);
+      background: var(--sky-ultra);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 7rem 2.5rem 4rem;
+      max-width: 960px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-weight: 600;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--sky-light);
+      border-radius: 1px;
+    }
+
+    .hero-name {
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-name .sky { color: var(--sky); }
+
+    .hero-slogan {
+      font-size: clamp(1.1rem, 2.8vw, 1.5rem);
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+      font-weight: 400;
+    }
+
+    .hero-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+      line-height: 1.65;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .hero-tag {
+      background: var(--sky-ultra);
+      border: 1px solid var(--sky-pale);
+      color: var(--sky);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.65rem 1.5rem;
+      border-radius: 9px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .btn-sky {
+      background: var(--sky);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(14,165,233,0.3);
+    }
+
+    .btn-sky:hover { background: #0284c7; transform: translateY(-1px); box-shadow: 0 6px 22px rgba(14,165,233,0.4); }
+
+    .btn-outline {
+      background: var(--surface);
+      color: var(--sky);
+      border: 1.5px solid var(--sky-pale);
+    }
+
+    .btn-outline:hover { border-color: var(--sky); background: var(--sky-ultra); }
+
+    /* ── SECTION ── */
+    .section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 4.5rem 2.5rem;
+      border-top: 1px solid var(--border-light);
+      position: relative;
+    }
+
+    .section-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sky);
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-tag::before {
+      content: '';
+      display: block;
+      width: 14px; height: 2px;
+      background: var(--sky-light);
+      border-radius: 1px;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.1rem);
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+    }
+
+    /* ── CARD BASE ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 1.4rem 1.6rem;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.22s, transform 0.22s;
+    }
+
+    .card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+
+    .card-label {
+      font-size: 0.7rem;
+      color: var(--sky);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-value {
+      font-size: 0.97rem;
+      color: var(--text);
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    /* ── ABOUT GRID ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .about-grid .wide { grid-column: span 3; }
+    .about-grid .half { grid-column: span 1; }
+
+    /* ── SKILLS ── */
+    .skills-wrap { display: flex; flex-direction: column; gap: 1.2rem; }
+
+    .skill-row {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 1.2rem 1.5rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+    }
+
+    .skill-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--sky);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      min-width: 100px;
+      padding-top: 0.3rem;
+    }
+
+    .tag-wrap { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+
+    .tag {
+      background: var(--sky-ultra);
+      border: 1px solid var(--sky-pale);
+      color: var(--navy);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.28rem 0.8rem;
+      border-radius: 7px;
+      transition: all 0.18s;
+    }
+
+    .tag:hover { background: var(--sky-pale); }
+
+    .tag.main {
+      background: var(--sky);
+      border-color: var(--sky);
+      color: #fff;
+    }
+
+    .tag.learning {
+      background: #fff;
+      border: 1.5px dashed var(--sky-light);
+      color: var(--sky);
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.1rem;
+    }
+
+    .proj-card {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.22s, transform 0.22s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .proj-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--sky-light), var(--sky));
+      opacity: 0;
+      transition: opacity 0.22s;
+    }
+
+    .proj-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+    .proj-card:hover::before { opacity: 1; }
+
+    .proj-card.featured { grid-column: span 2; }
+
+    .proj-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--sky-ultra);
+      color: var(--sky);
+      border: 1px solid var(--sky-pale);
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      margin-bottom: 0.8rem;
+    }
+
+    .proj-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.45rem;
+    }
+
+    .proj-card p {
+      font-size: 0.87rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+
+    .proj-techs { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    .proj-tech {
+      font-size: 0.75rem;
+      background: var(--surface2);
+      border: 1px solid var(--border-light);
+      color: var(--text-muted);
+      padding: 0.18rem 0.6rem;
+      border-radius: 5px;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline { padding-left: 1.6rem; position: relative; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--sky-light), transparent);
+      border-radius: 1px;
+    }
+
+    .tl-item { position: relative; margin-bottom: 2rem; }
+
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -1.6rem; top: 7px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--sky);
+      box-shadow: 0 0 0 3px var(--sky-ultra);
+    }
+
+    .tl-chip {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--sky);
+      background: var(--sky-ultra);
+      border: 1px solid var(--sky-pale);
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      margin-bottom: 0.4rem;
+    }
+
+    .tl-item h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+
+    .tl-item p { font-size: 0.87rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── STRENGTHS ── */
+    .strength-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .strength-card {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: all 0.22s;
+    }
+
+    .strength-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+
+    .strength-icon {
+      width: 46px; height: 46px;
+      background: var(--sky-ultra);
+      border: 1.5px solid var(--sky-pale);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem;
+      margin: 0 auto 0.9rem;
+    }
+
+    .strength-card h3 { font-size: 1.05rem; font-weight: 800; color: var(--navy); margin-bottom: 0.3rem; }
+    .strength-card p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.6; }
+
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 1.3rem 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .info-card .info-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 0.4rem;
+    }
+
+    .info-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; }
+
+    /* ── VISION ── */
+    .vision-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .vision-card {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+    }
+
+    .vision-num {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--sky-pale);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .vision-card .v-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--sky);
+      margin-bottom: 0.4rem;
+    }
+
+    .vision-card h3 { font-size: 0.97rem; font-weight: 700; color: var(--navy); margin-bottom: 0.25rem; }
+    .vision-card p { font-size: 0.84rem; color: var(--text-muted); }
+
+    .slogan-box {
+      background: linear-gradient(135deg, var(--sky-ultra), #fff);
+      border: 1.5px solid var(--sky-pale);
+      border-radius: 16px;
+      padding: 2rem 2.5rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .slogan-box p { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.6rem; }
+    .slogan-box h3 { font-size: clamp(1.3rem, 3vw, 1.9rem); font-weight: 900; color: var(--sky); letter-spacing: -0.01em; }
+
+    /* ── INTERESTS ── */
+    .interest-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .interest-card {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 1.2rem 1.4rem;
+      box-shadow: var(--shadow);
+    }
+
+    .interest-card .i-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--sky);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.35rem;
+    }
+
+    .interest-card p { font-size: 0.9rem; color: var(--text); font-weight: 500; }
+
+    /* ── CONTACT ── */
+    #contact { text-align: center; }
+
+    .contact-box {
+      background: linear-gradient(135deg, var(--sky-ultra), #fff);
+      border: 1.5px solid var(--sky-pale);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-box h3 { font-size: 1.8rem; font-weight: 900; color: var(--navy); margin-bottom: 0.6rem; }
+    .contact-box p { color: var(--text-muted); margin-bottom: 2rem; font-size: 0.93rem; max-width: 460px; margin-left: auto; margin-right: auto; }
+
+    .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── QUOTE ── */
+    .quote {
+      border-left: 3px solid var(--sky-light);
+      padding: 0.7rem 1.2rem;
+      background: var(--sky-ultra);
+      border-radius: 0 10px 10px 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 1rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border-light);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ── FADE IN ── */
+    .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── DIVIDER ── */
+    .divider { width: 40px; height: 3px; background: linear-gradient(90deg, var(--sky-light), var(--sky)); border-radius: 2px; margin-bottom: 2rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-grid .wide, .about-grid .half { grid-column: span 1; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .proj-card.featured { grid-column: span 1; }
+      .strength-grid, .vision-grid, .interest-grid { grid-template-columns: 1fr; }
+      .skill-row { flex-direction: column; gap: 0.6rem; }
+      .skill-label { min-width: unset; }
+      .nav-links { display: none; }
+      #hero { padding-top: 5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">이상욱 · Portfolio</div>
+  <ul class="nav-links">
+    <li><a href="#about">학업</a></li>
+    <li><a href="#skills">기술</a></li>
+    <li><a href="#projects">프로젝트</a></li>
+    <li><a href="#experience">경험</a></li>
+    <li><a href="#strength">강점</a></li>
+    <li><a href="#vision">목표</a></li>
+    <li><a href="#contact">연락</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-eyebrow">컴퓨터 소프트웨어 · 전문대 재학 중</p>
+  <h1 class="hero-name">이 <span class="sky">상 욱</span></h1>
+  <p class="hero-slogan">"까지 않은 복권."</p>
+  <p class="hero-desc">
+    컴퓨터를 좋아해서 시작했고, 끈기와 집중으로 성장 중인 개발자입니다.<br>
+    C / C++ 기반으로 시작해 Java, Python까지 — 아직 까이지 않은 가능성을 가지고 있습니다.
+  </p>
+  <div class="hero-tags">
+    <span class="hero-tag">C / C++</span>
+    <span class="hero-tag">Java</span>
+    <span class="hero-tag">Python</span>
+    <span class="hero-tag">Git</span>
+    <span class="hero-tag">오픈소스 기여</span>
+    <span class="hero-tag">React 학습 중</span>
+  </div>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-sky">프로젝트 보기</a>
+    <a href="#contact" class="btn btn-outline">연락하기</a>
+  </div>
+</section>
+
+<!-- 학업 배경 -->
+<section class="section fade-in" id="about">
+  <p class="section-tag">A. 학업 배경</p>
+  <h2 class="section-title">About Me</h2>
+  <div class="divider"></div>
+  <div class="about-grid">
+    <div class="card half">
+      <div class="card-label">전공</div>
+      <div class="card-value">컴퓨터 소프트웨어</div>
+    </div>
+    <div class="card half">
+      <div class="card-label">학교 유형</div>
+      <div class="card-value">전문대 재학 중</div>
+    </div>
+    <div class="card half">
+      <div class="card-label">자격증</div>
+      <div class="card-value">ITQ 엑셀</div>
+    </div>
+    <div class="card wide">
+      <div class="card-label">전공 선택 이유</div>
+      <div class="card-value">컴퓨터를 좋아했던 것이 가장 큰 이유였습니다. 좋아하는 것을 전공으로 삼아 성장해 나가고 있습니다.</div>
+    </div>
+    <div class="card wide">
+      <div class="card-label">가장 인상 깊었던 수업</div>
+      <div class="card-value">
+        오픈소스 소프트웨어 — 교수님의 강의 방식이 재미있었고, 실전성이 높아 기억에 남습니다.
+        이 수업에서 팀 프로젝트(3인 팀)를 통해 프로그램 수정과 충돌 해결을 직접 경험했습니다.
+      </div>
+    </div>
+    <div class="card half">
+      <div class="card-label">가장 어려웠던 과목</div>
+      <div class="card-value">HTML — 학년이 올라가며 JavaScript, PHP를 공부하면서 조금씩 극복해 나갔습니다.</div>
+    </div>
+    <div class="card half">
+      <div class="card-label">추가 학습 계획</div>
+      <div class="card-value">대학원 진학을 고려 중이며, 온라인 강의를 통한 자기주도 학습을 병행하고 있습니다.</div>
+    </div>
+    <div class="card wide">
+      <div class="card-label">가장 자랑스러운 성취</div>
+      <div class="card-value">아무것도 몰랐을 때와는 다르게, 이제는 혼자서 빈 공간을 코드로 채울 수 있게 된 것이 가장 큰 성취입니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 기술 -->
+<section class="section fade-in" id="skills">
+  <p class="section-tag">B. 기술 및 역량</p>
+  <h2 class="section-title">Skills</h2>
+  <div class="divider"></div>
+  <div class="skills-wrap">
+    <div class="skill-row">
+      <div class="skill-label">핵심 언어</div>
+      <div class="tag-wrap">
+        <span class="tag main">C</span>
+        <span class="tag main">C++</span>
+        <span class="tag">Python</span>
+        <span class="tag">Java</span>
+        <span class="tag">PHP</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-label">학습 중</div>
+      <div class="tag-wrap">
+        <span class="tag learning">React ✦</span>
+        <span class="tag learning">JavaScript</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-label">협업 / 버전관리</div>
+      <div class="tag-wrap">
+        <span class="tag">Git</span>
+        <span class="tag">GitHub</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-label">디자인 / 기타</div>
+      <div class="tag-wrap">
+        <span class="tag">Photoshop (기초)</span>
+        <span class="tag">영어 (기초)</span>
+        <span class="tag">일본어 (기초)</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-label">강점</div>
+      <div class="tag-wrap">
+        <span class="tag main">독창성</span>
+        <span class="tag">적응력</span>
+        <span class="tag">문서 작성 (평균 이상)</span>
+      </div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:1.2rem;">
+    배울 때는 한 쪽엔 생성형 AI, 한 쪽엔 실행 앱 — 직접 돌려보며 몸으로 익히는 스타일입니다.
+  </div>
+</section>
+
+<!-- 프로젝트 -->
+<section class="section fade-in" id="projects">
+  <p class="section-tag">C. 프로젝트 경험</p>
+  <h2 class="section-title">Projects</h2>
+  <div class="divider"></div>
+  <div class="projects-grid">
+
+    <div class="proj-card featured">
+      <span class="proj-badge">대표 프로젝트</span>
+      <h3>오픈소스 소프트웨어 팀 프로젝트</h3>
+      <p>3인 팀에서 <strong>팀장</strong>을 맡아 프로그램을 수정하고 충돌 문제를 해결했습니다.
+         팀장이 된 순간이 가장 어려웠지만, 단독으로 추가 학습하며 극복했습니다.
+         이 프로젝트를 통해 팀을 이끄는 방법과 팀장의 역할을 몸으로 배웠습니다.</p>
+      <div class="proj-techs">
+        <span class="proj-tech">오픈소스</span>
+        <span class="proj-tech">Git</span>
+        <span class="proj-tech">팀 프로젝트 (3인)</span>
+        <span class="proj-tech">팀장 역할</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <span class="proj-badge">개인 프로젝트</span>
+      <h3>게임 프로그램</h3>
+      <p>가장 많은 시간을 투자한 프로젝트. C++에서 다수의 .cpp와 헤더 파일로 게임을 구성했으며, 기술적으로 가장 복잡했던 작업입니다. Python 버전도 제작했습니다.</p>
+      <div class="proj-techs">
+        <span class="proj-tech">C++</span>
+        <span class="proj-tech">Python</span>
+        <span class="proj-tech">다중 파일 구조</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <span class="proj-badge">개인 프로젝트</span>
+      <h3>자판기 기능 구현</h3>
+      <p>C언어로 간단한 자판기 기능을 구현한 프로젝트. 두 번째로 인상 깊은 작업으로, 로직 설계와 구조화에 집중했습니다.</p>
+      <div class="proj-techs">
+        <span class="proj-tech">C</span>
+        <span class="proj-tech">알고리즘 설계</span>
+      </div>
+    </div>
+
+  </div>
+  <div class="quote" style="margin-top:1.2rem;">
+    아이디어는 일상, 친구들의 대화, 주변 인물들에게서 얻습니다. 프로젝트를 시작할 땐 항상 구성을 먼저 정합니다.
+  </div>
+  <div style="margin-top:1rem; padding:1.2rem 1.5rem; background:var(--surface); border:1px solid var(--border-light); border-radius:12px; box-shadow:var(--shadow);">
+    <div class="card-label">미래에 만들고 싶은 프로젝트</div>
+    <div class="card-value">커뮤니티 사이트, 또는 일상에서 불편했던 기계의 기능을 개선하는 프로젝트를 진행하고 싶습니다.</div>
+  </div>
+</section>
+
+<!-- 경험 -->
+<section class="section fade-in" id="experience">
+  <p class="section-tag">D. 실무 / 인턴십 / 활동</p>
+  <h2 class="section-title">Experience</h2>
+  <div class="divider"></div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-chip">동아리</div>
+      <h3>컴퓨터 소프트웨어 공부 동아리 부장</h3>
+      <p>동아리에 참여해 부장 역할을 맡았습니다. 팀을 이끌고 조율하는 경험을 쌓았습니다.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-chip">멘토링 · 튜터링</div>
+      <h3>멘토링 및 과외 경험</h3>
+      <p>멘티·멘토 역할과 튜터링/과외 경험이 있습니다. 지식을 전달하는 능력을 키웠습니다.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-chip">봉사활동</div>
+      <h3>축구장 안내 봉사활동</h3>
+      <p>축구장 안내 봉사활동에 참여했습니다. 책임감 있는 역할 수행을 경험했습니다.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-chip">팀 협업</div>
+      <h3>갈등 중재 경험</h3>
+      <p>팀 내 갈등 발생 시 양쪽의 말을 들어보고, 어느 쪽도 옹호하지 않고 해결 방안을 제시해 중재했습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 성격 및 강점 -->
+<section class="section fade-in" id="strength">
+  <p class="section-tag">E. 성격 및 강점</p>
+  <h2 class="section-title">Strengths</h2>
+  <div class="divider"></div>
+  <div class="strength-grid">
+    <div class="strength-card">
+      <div class="strength-icon">🔥</div>
+      <h3>끈기</h3>
+      <p>팀장이 되어 어려움을 겪었을 때도 단독으로 공부를 더 해 극복한 경험이 있습니다.</p>
+    </div>
+    <div class="strength-card">
+      <div class="strength-icon">🎯</div>
+      <h3>집중</h3>
+      <p>내가 해결할 수 있는 역량을 갖춘 상태에서 코딩할 때 가장 집중력이 높아집니다.</p>
+    </div>
+    <div class="strength-card">
+      <div class="strength-icon">😄</div>
+      <h3>유쾌함</h3>
+      <p>주변에서 "미필"이라는 별명으로 불릴 만큼 유쾌한 분위기를 만들어 나갑니다.</p>
+    </div>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+    <div class="info-card">
+      <div class="info-label">문제 해결 방식</div>
+      <p>문제의 원인을 먼저 생각하고, 해결할 키워드가 무엇인지 찾는 방식으로 접근합니다.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-label">피드백 수용 방식</div>
+      <p>실제로 이루어질 수 있는지, 반영 시 이득과 손해가 무엇인지 따져본 뒤 합리적으로 반영합니다.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-label">단점과 개선 방법</div>
+      <p>생각을 빠르게 정리하는 것이 어렵습니다. 머릿속 매뉴얼을 만들어 매뉴얼에 맞는 것부터 빠르게 행동으로 옮깁니다.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-label">중요하게 생각하는 가치</div>
+      <p>배려와 예의가 최우선입니다. 스트레스는 게임과 멍 때리기로 해소합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 목표 및 비전 -->
+<section class="section fade-in" id="vision">
+  <p class="section-tag">F. 목표 및 비전</p>
+  <h2 class="section-title">Vision</h2>
+  <div class="divider"></div>
+  <div class="vision-grid">
+    <div class="vision-card">
+      <div class="vision-num">5Y</div>
+      <div class="v-label">5년 후 목표</div>
+      <h3>회사에서 1인분 이상 하는 프로그래머</h3>
+      <p>팀에서 확실히 제 몫을 해내는 개발자가 되는 것이 목표입니다.</p>
+    </div>
+    <div class="vision-card">
+      <div class="vision-num">10Y</div>
+      <div class="v-label">10년 후 유산</div>
+      <h3>이름 석 자를 네이버에 남기기</h3>
+      <p>살짝이나마 검색될 만큼 사회에 흔적을 남기고 싶습니다.</p>
+    </div>
+    <div class="vision-card">
+      <div class="vision-num">!</div>
+      <div class="v-label">단기 목표</div>
+      <h3>프로그래머 자격증 취득</h3>
+      <p>지금 당장 이루고 싶은 목표로 관련 자격증 준비를 하고 있습니다.</p>
+    </div>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1.2rem;">
+    <div class="info-card">
+      <div class="info-label">희망 직무 / 조직</div>
+      <p>팀장 역할 · 대기업 (방향이 확실히 잡혀있을 것이라 생각함)</p>
+    </div>
+    <div class="info-card">
+      <div class="info-label">사회 기여 방식</div>
+      <p>일상에서 불편했던 기계와 시스템을 개선하는 소프트웨어를 만들고 싶습니다.</p>
+    </div>
+  </div>
+  <div class="slogan-box">
+    <p>나를 표현하는 한 마디</p>
+    <h3>까지 않은 복권.</h3>
+  </div>
+</section>
+
+<!-- 관심사 -->
+<section class="section fade-in" id="interests">
+  <p class="section-tag">G. 관심사 및 개인 색깔</p>
+  <h2 class="section-title">Interests</h2>
+  <div class="divider"></div>
+  <div class="interest-grid">
+    <div class="interest-card">
+      <div class="i-label">취미</div>
+      <p>게임, 운동</p>
+    </div>
+    <div class="interest-card">
+      <div class="i-label">최근 빠져든 것</div>
+      <p>Java — 깊이 파고드는 중</p>
+    </div>
+    <div class="interest-card">
+      <div class="i-label">덕질 분야</div>
+      <p>포켓몬</p>
+    </div>
+    <div class="interest-card">
+      <div class="i-label">즐겨 보는 장르</div>
+      <p>스릴러, 감동</p>
+    </div>
+    <div class="interest-card">
+      <div class="i-label">영감을 받는 인물</div>
+      <p>정현창</p>
+    </div>
+    <div class="interest-card">
+      <div class="i-label">학습 스타일</div>
+      <p>생성형 AI + 실행 앱 동시에 열고 직접 돌려보며 익히기</p>
+    </div>
+  </div>
+</section>
+
+<!-- 연락 -->
+<section class="section fade-in" id="contact">
+  <p class="section-tag">Contact</p>
+  <h2 class="section-title">함께 일해요</h2>
+  <div class="divider"></div>
+  <div class="contact-box">
+    <h3>나는 이상욱이다.</h3>
+    <p>까지 않은 복권 같은 가능성을 가진 개발자입니다.<br>끈기와 집중, 그리고 독창성으로 함께 성장할 준비가 되어 있습니다.</p>
+    <div class="contact-links">
+      <a href="mailto:" class="btn btn-sky">이메일 보내기</a>
+      <a href="#" class="btn btn-outline">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>이상욱 · 컴퓨터 소프트웨어 · Portfolio</p>
+  <p style="margin-top:0.3rem; font-size:0.75rem; color:#94a3b8;">Made with index.html 설문지 답변</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.07 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sections = document.querySelectorAll('section[id]');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+    navLinks.forEach(a => {
+      const active = a.getAttribute('href') === '#' + current;
+      a.style.color = active ? 'var(--sky)' : '';
+      a.style.background = active ? 'var(--sky-ultra)' : '';
+    });
+  });
+</script>
+</body>
+</html>
